@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 services:
   web:
     container_name: "dev-activity_web"
