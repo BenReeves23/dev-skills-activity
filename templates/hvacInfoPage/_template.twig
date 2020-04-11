@@ -1,0 +1,39 @@
+{% extends "_layout" %}
+
+{% set posts = craft.entries.section('hvacInfoPage').all() %}
+
+{% block content %}
+
+  <div class="py-2 px-2">
+      <button class="bg-blue-700 hover:bg-blue-700 text-white font-bold px-4 border border-blue-700">
+        Process
+      </button>
+      <div class="text-4xl font-bold py-2">
+          Your AC Repair in Four Easy Steps
+      </div>
+  </div>
+  {% for post in posts %}
+	  <div class="md:flex py-2 px-2">
+	  	{% if post.rowImage|length %}
+		    {% for image in post.rowImage.all() %}
+		    	<div class="md:flex-shrink-0">
+			      <img class="sm:w-full md:w-64" src="{{ image.url }}" alt="{{ image.title }}">
+			    </div>
+			    {# I COULDNT GET THIS TO FLOAT THE WAY I WANTED :(
+			    	<div class="rounded-full h-16 w-16 z-10 flex items-center justify-center bg-blue-700 text-white">{{ post.title }}</div> #}
+		    {% endfor %}
+		  {% endif %}
+	    <div class="mt-4 md:mt-0 md:ml-6">
+	      	<p class="block mt-1 text-2xl leading-tight font-semibold text-gray-900">{{ post.rowContent }}</p>
+	      	<div class="summary">
+	      		<p class="mt-2 text-gray-600">{{ post.summary }}</a></p>
+	      	</div>
+	      	<div class="summaryHidden off">
+		    	<i class="fa fa-caret-right" id="arrowRight{{ post.title }}" onclick="showMore('{{ post.title }}')"></i><span id="showMoreWords{{ post.title }}"><em>Show More</em></span>
+		    	<i class="off" id="arrowDown{{ post.title }}" onclick="showLess('{{ post.title }}')"></i><span id="showLessWords{{ post.title }}" class="off"><em>Show Less</em></span>
+		    	<p id="{{ post.title }}" class="off">{{ post.summary }}</a></p>
+	  	  	</div>
+	    </div>
+	  </div>
+  {% endfor %}
+{% endblock %}

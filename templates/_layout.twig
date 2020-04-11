@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="{{ craft.app.language }}">
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8"/>
+    <title>{{ siteName }}</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+    <link href="/output.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      .off {
+        display:none;
+      }
+      .fa-caret-right, .fa-caret-down {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <script>
+    function checkMobile() {
+      var isMobile = navigator.userAgent.match(/Mobile/i) != null;
+      if (isMobile) {
+        $('.summary').each(function() {
+            $(this).attr("class", "off summary");
+        });
+        $('.summaryHidden').each(function() {
+            $(this).attr("class", "summaryHidden");
+        });
+      }
+    }
+  </script>
+  <body class="ltr" onload="checkMobile();">
+    <div class="container mx-auto px-4 max-w-screen-lg">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+  <script>
+    function showMore(id) {
+      var showMoreWords = document.getElementById("showMoreWords"+id);
+      var showLessWords = document.getElementById("showLessWords"+id);
+      var arrowRight = document.getElementById("arrowRight"+id);
+      var arrowDown = document.getElementById("arrowDown"+id);
+      showMoreWords.className="off";
+      showLessWords.className="";
+      arrowRight.className="off";
+      arrowDown.className="fa fa-caret-down";
+      document.getElementById(id).className='mt-2 text-gray-600';
+    }
+    function showLess(id) {
+      var showLessWords = document.getElementById("showLessWords"+id);
+      var showMoreWords = document.getElementById("showMoreWords"+id);
+      var arrowRight = document.getElementById("arrowRight"+id);
+      var arrowDown = document.getElementById("arrowDown"+id);
+      showMoreWords.className="";
+      showLessWords.className="off";
+      arrowRight.className="fa fa-caret-right";
+      arrowDown.className="off";
+      document.getElementById(id).className='off';
+    }
+  </script>
+</html>
